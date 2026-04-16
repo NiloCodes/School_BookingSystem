@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/mybookings.css">
+</head>
+<body>
+  <header class="main-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="/images/ucc.png" alt="University Logo" class="logo-image">
+        <a href="/index.html" class="logo">
+          <div class="logo-text">
+            <span class="logo-title">University Hall Booking</span>
+            <span class="logo-subtitle">Smart Reservation System</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="/index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="/MyBookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> My Bookings</a></li>
+          <li class="nav-item"><a href="/coordinator.html" class="nav-link"><i class="fas fa-book-open"></i> Coordinator</a></li>
+        </ul>
+      </nav>
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Nav Drawer -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-list">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="MyBookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+        <a href="coordinator.html"><i class="fas fa-book-open"></i> Coordinator</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <section class="container" style="margin-top:2rem; margin-bottom:2rem;">
+        <div class="mybookings-header">
+        <h2>My Bookings</h2>
+        <p>View and manage your hall bookings below.</p>
+        </div>
+
+        <div class="mb-table-wrap">
+            <table class="mb-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Hall Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-booking='{"id":"12345","hall":"Lecture Hall A","date":"2025-07-21","time":"9:00 AM - 11:00 AM","status":"Confirmed"}'>
+                        <td>#12345</td>
+                        <td>Lecture Hall A</td>
+                        <td>2025-07-21</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td><span class="mb-badge mb-badge-confirmed">Confirmed</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mb-view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="btn btn-outline btn-sm mb-cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                        </td>
+                    </tr>
+                    <tr data-booking='{"id":"123435","hall":"Lecture Hall B","date":"2025-07-21","time":"9:00 AM - 11:00 AM","status":"Confirmed"}'>
+                        <td>#12345</td>
+                        <td>Lecture Hall B</td>
+                        <td>2025-08-12</td>
+                        <td>12:00 PM - 2:00 PM</td>
+                        <td><span class="mb-badge mb-badge-confirmed">Confirmed</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mb-view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="btn btn-outline btn-sm mb-cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                        </td>
+                    </tr>
+                    <tr data-booking='{"id":"12346","hall":"Auditorium","date":"2025-07-25","time":"1:00 PM - 3:00 PM","status":"Pending"}'>
+                        <td>#12346</td>
+                        <td>Auditorium D</td>
+                        <td>2025-07-25</td>
+                        <td>1:00 PM - 3:00 PM</td>
+                        <td><span class="mb-badge mb-badge-pending">Pending</span></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm mb-view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="btn btn-outline btn-sm mb-cancel-btn"><i class="fas fa-times"></i> Cancel</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Modal for View Details -->
+    <div id="mb-modal" class="mb-modal">
+        <div class="mb-modal-content">
+            <span class="mb-modal-close">&times;</span>
+            <h3>Booking Details</h3>
+            <div id="mb-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Confirm Cancel Modal -->
+    <div id="mb-cancel-modal" class="mb-modal">
+        <div class="mb-modal-content">
+            <span class="mb-modal-close">&times;</span>
+            <h3>Cancel Booking</h3>
+            <p>Are you sure you want to cancel this booking?</p>
+            <button class="btn btn-outline btn-sm" id="mb-cancel-confirm">Yes, Cancel</button>
+            <button class="btn btn-primary btn-sm mb-modal-close">No, Go Back</button>
+        </div>
+    </div>
+
+    <!-- Coordinator Login Modal -->
+<div id="loginModal" class="modal" aria-hidden="true" aria-labelledby="loginTitle">
+  <div class="modal-content">
+    <h3 id="loginTitle">Coordinator Login</h3>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginUser">Username:</label>
+        <input type="text" id="loginUser" name="username"  required>
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Password:</label>
+        <input type="password" id="loginPass" name="password" a required>
+      </div>
+      <div id="loginError" style="color:#e74c3c; min-height:22px; font-size:0.98em; margin-bottom:7px; text-align:center;"></div>
+      <div class="modal-actions flex-between">
+        <button type="button" class="btn btn-secondary" id="loginCancelBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+    <footer>
+        <p>© 2023 UCC. All rights reserved.</p>
+    </footer>
+<script>
+// Modal logic
+const mbModal = document.getElementById('mb-modal');
+const mbModalBody = document.getElementById('mb-modal-body');
+const mbCancelModal = document.getElementById('mb-cancel-modal');
+let currentBookingRow = null;
+
+document.querySelectorAll('.mb-view-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        const data = JSON.parse(row.dataset.booking);
+        const statusLower = data.status.toLowerCase();
+        let badgeClass = '';
+        if (statusLower === 'confirmed') badgeClass = 'mb-badge-confirmed';
+        else if (statusLower === 'pending') badgeClass = 'mb-badge-pending';
+        else if (statusLower === 'cancelled') badgeClass = 'mb-badge-cancelled';
+
+        mbModalBody.innerHTML = `
+            <ul>
+                <li><i class="fas fa-key"></i> <strong>Booking ID:</strong> #${data.id}</li>
+                <li><i class="fas fa-university"></i> <strong>Hall Name:</strong> ${data.hall}</li>
+                <li><i class="fas fa-calendar"></i> <strong>Date:</strong> ${data.date}</li>
+                <li><i class="fas fa-clock"></i> <strong>Time:</strong> ${data.time}</li>
+                <li><i class="fas fa-tag"></i> <strong>Status:</strong> <span class="mb-badge ${badgeClass}">${data.status}</span></li>
+            </ul>
+        `;
+
+        mbModal.style.display = 'block';
+    });
+});
+document.querySelectorAll('.mb-cancel-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        currentBookingRow = this.closest('tr');
+        mbCancelModal.style.display = 'block';
+    });
+});
+document.querySelectorAll('.mb-modal-close').forEach(btn => {
+    btn.addEventListener('click', function() {
+        mbModal.style.display = 'none';
+        mbCancelModal.style.display = 'none';
+    });
+});
+document.getElementById('mb-cancel-confirm').addEventListener('click', function() {
+    if (currentBookingRow) {
+    // Simulate cancel: change status text
+    currentBookingRow.querySelector('.mb-badge').textContent = 'Cancelled';
+    currentBookingRow.querySelector('.mb-badge').className = 'mb-badge mb-badge-cancelled';
+    // Update the data-booking status!
+    let bookingData = JSON.parse(currentBookingRow.dataset.booking);
+    bookingData.status = 'Cancelled';
+    currentBookingRow.dataset.booking = JSON.stringify(bookingData);
+
+    mbCancelModal.style.display = 'none';
+}
+
+});
+window.onclick = function(event) {
+    if (event.target === mbModal) mbModal.style.display = 'none';
+    if (event.target === mbCancelModal) mbCancelModal.style.display = 'none';
+};
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    if (mobileMenuToggle && mobileNav) {
+        mobileMenuToggle.addEventListener('click', function() {
+        mobileNav.classList.toggle('active');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+        });
+        // Optional: close on menu link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+  }
+});
+
+// --- Coordinator Login Modal ---
+document.addEventListener("DOMContentLoaded", function() {
+  // Intercept Coordinator nav link
+  const coordinatorLink = document.querySelector('.main-nav a[href="coordinator.html"]');
+  const loginModal = document.getElementById('loginModal');
+  const loginForm = document.getElementById('loginForm');
+  const loginCancelBtn = document.getElementById('loginCancelBtn');
+  const loginError = document.getElementById('loginError');
+
+  if (coordinatorLink) {
+    coordinatorLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      loginModal.style.display = 'flex';
+      loginModal.setAttribute('aria-hidden', 'false');
+      loginError.textContent = '';
+      loginForm.reset();
+      document.getElementById('loginUser').focus();
+    });
+  }
+
+  loginCancelBtn.onclick = () => {
+    loginModal.style.display = 'none';
+    loginModal.setAttribute('aria-hidden', 'true');
+    loginForm.reset();
+    loginError.textContent = '';
+  };
+
+  // Fake login: username = admin, password = admin
+  loginForm.onsubmit = function(e) {
+    e.preventDefault();
+    const user = loginForm.username.value.trim();
+    const pass = loginForm.password.value;
+    if (user === 'admin' && pass === 'admin') {
+      window.location.href = 'coordinator.html';
+    } else {
+      loginError.textContent = 'Invalid username or password!';
+    }
+  };
+
+  // Close modal if clicking outside
+  window.addEventListener('click', function(event) {
+    if (event.target === loginModal) {
+      loginModal.style.display = 'none';
+      loginModal.setAttribute('aria-hidden', 'true');
+      loginError.textContent = '';
+    }
+  });
+});
+
+
+</script>
+</body>
+</html>

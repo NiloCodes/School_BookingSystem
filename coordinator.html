@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coordinator Dashboard</title>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/coordinator.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+</head>
+<body>
+    <header class="main-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo-container">
+        <img src="/images/ucc.png" alt="University Logo" class="logo-image">
+        <a href="/index.html" class="logo">
+          <div class="logo-text">
+            <span class="logo-title">University Hall Booking</span>
+            <span class="logo-subtitle">Smart Reservation System</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="/index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a href="/MyBookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> My Bookings</a></li>
+          <li class="nav-item"><a href="/coordinator.html" class="nav-link"><i class="fas fa-book-open"></i> Coordinator</a></li>
+        </ul>
+      </nav>
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="mobile-menu-toggle" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile Nav Drawer -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-content">
+      <div class="mobile-nav-list">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="MyBookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+        <a href="coordinator.html"><i class="fas fa-book-open"></i> Coordinator</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+    <section class="container" style="margin-top:2rem; margin-bottom:2rem;">
+        <div class="coordinator-header">
+        <h2>Coordinator Dashboard</h2>
+        <p>Manage all bookings, review requests, and see usage stats below.</p>
+        </div>
+
+        <div class="cd-table-search">
+            <input type="text" class="date-input" style="width:250px;" placeholder="Search by user, hall, or date...">
+            <button class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Search</button>
+        </div>
+        <div class="cd-table-wrap">
+            <table class="cd-table">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>User</th>
+                        <th>Hall Name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-booking='{"id":"12345","user":"Jane Doe","hall":"Lecture Hall A","date":"2025-07-21","time":"9:00 AM - 11:00 AM","status":"Confirmed"}'>
+                        <td>#12345</td>
+                        <td>Jane Doe</td>
+                        <td>Lecture Hall A</td>
+                        <td>2025-07-21</td>
+                        <td>9:00 AM - 11:00 AM</td>
+                        <td><span class="cd-badge cd-badge-confirmed">Confirmed</span></td>
+                        <td>
+                            <button class="btn btn-outline btn-sm cd-approve-btn"><i class="fas fa-check"></i> Approve</button>
+                            <button class="btn btn-outline btn-sm cd-reject-btn"><i class="fas fa-times"></i> Reject</button>
+                            <button class="btn btn-primary btn-sm cd-view-btn"><i class="fas fa-eye"></i> View</button>
+                        </td>
+                    </tr>
+                    <tr data-booking='{"id":"12346","user":"John Smith","hall":"Seminar Room 2","date":"2025-07-25","time":"1:00 PM - 3:00 PM","status":"Pending"}'>
+                        <td>#12346</td>
+                        <td>John Smith</td>
+                        <td>Seminar Room 2</td>
+                        <td>2025-07-25</td>
+                        <td>1:00 PM - 3:00 PM</td>
+                        <td><span class="cd-badge cd-badge-pending">Pending</span></td>
+                        <td>
+                            <button class="btn btn-outline btn-sm cd-approve-btn"><i class="fas fa-check"></i> Approve</button>
+                            <button class="btn btn-outline btn-sm cd-reject-btn"><i class="fas fa-times"></i> Reject</button>
+                            <button class="btn btn-primary btn-sm cd-view-btn"><i class="fas fa-eye"></i> View</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="cd-stats">
+            <h3>Usage Stats</h3>
+            <ul>
+                <li>Total Bookings this Month: <strong>24</strong></li>
+                <li>Pending Approvals: <strong>1</strong></li>
+                <li>Most Popular Hall: <strong>Lecture Hall A</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Modal for View Details -->
+    <div id="cd-modal" class="cd-modal">
+        <div class="cd-modal-content">
+            <span class="cd-modal-close">&times;</span>
+            <h3>Booking Details</h3>
+            <div id="cd-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Confirm Modal -->
+    <div id="cd-confirm-modal" class="cd-modal">
+        <div class="cd-modal-content">
+            <span class="cd-modal-close">&times;</span>
+            <h3 id="cd-confirm-title"></h3>
+            <p id="cd-confirm-message"></p>
+            <button class="btn btn-outline btn-sm" id="cd-confirm-action">Yes</button>
+            <button class="btn btn-primary btn-sm cd-modal-close">No, Go Back</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 UCC. All rights reserved.</p>
+    </footer>
+
+<script>
+const cdModal = document.getElementById('cd-modal');
+const cdModalBody = document.getElementById('cd-modal-body');
+const cdConfirmModal = document.getElementById('cd-confirm-modal');
+const cdConfirmTitle = document.getElementById('cd-confirm-title');
+const cdConfirmMessage = document.getElementById('cd-confirm-message');
+let currentCDRow = null, cdAction = null;
+
+document.querySelectorAll('.cd-view-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        const data = JSON.parse(row.dataset.booking);
+        const statusLower = data.status.toLowerCase();
+        let badgeClass = '';
+        if (statusLower === 'confirmed') badgeClass = 'cd-badge-confirmed';
+        else if (statusLower === 'pending') badgeClass = 'cd-badge-pending';
+        else if (statusLower === 'rejected') badgeClass = 'cd-badge-rejected';
+
+        console.log('statusLower:', statusLower, 'badgeClass:', badgeClass); // debug line
+
+        cdModalBody.innerHTML = `
+            <ul>
+                <li><i class="fas fa-key"></i> <strong>Booking ID:</strong> #${data.id}</li>
+                <li><i class="fas fa-user"></i> <strong>User:</strong> ${data.user}</li>
+                <li><i class="fas fa-university"></i> <strong>Hall Name:</strong> ${data.hall}</li>
+                <li><i class="fas fa-calendar"></i> <strong>Date:</strong> ${data.date}</li>
+                <li><i class="fas fa-clock"></i> <strong>Time:</strong> ${data.time}</li>
+                <li><i class="fas fa-tag"></i> <strong>Status:</strong> <span class="cd-badge ${badgeClass}">${data.status}</span></li>
+            </ul>
+        `;
+
+        cdModal.style.display = 'block';
+    });
+});
+document.querySelectorAll('.cd-approve-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        currentCDRow = this.closest('tr');
+        cdAction = 'approve';
+        cdConfirmTitle.textContent = "Approve Booking";
+        cdConfirmMessage.textContent = "Are you sure you want to approve this booking?";
+        cdConfirmModal.style.display = 'block';
+    });
+});
+document.querySelectorAll('.cd-reject-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        currentCDRow = this.closest('tr');
+        cdAction = 'reject';
+        cdConfirmTitle.textContent = "Reject Booking";
+        cdConfirmMessage.textContent = "Are you sure you want to reject this booking?";
+        cdConfirmModal.style.display = 'block';
+    });
+});
+document.querySelectorAll('.cd-modal-close').forEach(btn => {
+    btn.addEventListener('click', function() {
+        cdModal.style.display = 'none';
+        cdConfirmModal.style.display = 'none';
+    });
+});
+document.getElementById('cd-confirm-action').addEventListener('click', function() {
+    if (currentCDRow && cdAction) {
+        const badge = currentCDRow.querySelector('.cd-badge');
+        if (cdAction === 'approve') {
+            badge.textContent = 'Confirmed';
+            badge.className = 'cd-badge cd-badge-confirmed';
+        } else if (cdAction === 'reject') {
+            badge.textContent = 'Rejected';
+            badge.className = 'cd-badge cd-badge-rejected';
+}
+
+// --- PATCH: update data-booking for the row ---
+let rowData = JSON.parse(currentCDRow.dataset.booking);
+if (cdAction === 'approve') rowData.status = 'Confirmed';
+else if (cdAction === 'reject') rowData.status = 'Rejected';
+currentCDRow.dataset.booking = JSON.stringify(rowData);
+
+cdConfirmModal.style.display = 'none';
+
+    }
+});
+window.onclick = function(event) {
+    if (event.target === cdModal) cdModal.style.display = 'none';
+    if (event.target === cdConfirmModal) cdConfirmModal.style.display = 'none';
+};
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (mobileMenuToggle && mobileNav) {
+    mobileMenuToggle.addEventListener('click', function() {
+      mobileNav.classList.toggle('active');
+      const icon = this.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+    // Optional: close on menu link click
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        mobileNav.classList.remove('active');
+        const icon = mobileMenuToggle.querySelector('i');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+  }
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+/* --- HEADER STYLES --- */
+.mybookings-header {
+    background: linear-gradient(90deg, #3498db 0%, #2ecc71 100%);
+    color: #fff;
+    padding: 2.5rem 0 2rem 0;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(52,152,219,0.12);
+}
+.mybookings-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.01em;
+}
+.mybookings-header p {
+    color: #f5f8fa;
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+/* --- CARD-TABLE --- */
+.mb-table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    margin: 2rem auto 3rem auto;
+    box-shadow: 0 8px 32px rgba(52,152,219,0.08);
+    background: transparent;
+}
+
+.mb-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(52,152,219,0.08);
+    overflow: hidden;
+}
+
+.mb-table th, .mb-table td {
+    padding: 1.2rem 1.25rem;
+    border-bottom: 1px solid #f1f5fa;
+    text-align: left;
+    font-size: 1.07rem;
+    background: transparent;
+    transition: background 0.18s;
+}
+
+.mb-table th {
+    background: #f5fafb;
+    font-weight: 800;
+    color: #2086c4;
+    border-bottom: 2.5px solid #eaf2fb;
+    letter-spacing: 0.04em;
+    font-size: 1.11rem;
+    text-transform: uppercase;
+}
+
+.mb-table tbody tr {
+    transition: background 0.18s;
+    border-radius: 10px;
+}
+
+.mb-table tbody tr:hover {
+    background: #f1f8ff;
+    box-shadow: 0 2px 12px rgba(52,152,219,0.06);
+}
+
+/* --- BADGES --- */
+.mb-badge {
+    padding: 0.4em 1.1em;
+    border-radius: 20px;
+    font-size: 1em;
+    font-weight: 700;
+    min-width: 96px;
+    text-align: center;
+    display: inline-block;
+    letter-spacing: 0.01em;
+    color: #fff;
+}
+.mb-badge-confirmed { background: linear-gradient(90deg,#24b47e 70%,#2ecc71 100%);}
+.mb-badge-pending   { background: linear-gradient(90deg,#f7b731 60%,#fbbd08 100%); color: #444;}
+.mb-badge-cancelled { background: linear-gradient(90deg,#e74c3c 60%,#c0392b 100%);}
+
+/* --- BUTTONS --- */
+.btn-sm {
+    padding: 0.45em 1.1em;
+    font-size: 0.98em;
+    border-radius: 7px;
+    transition: background 0.13s, color 0.13s, box-shadow 0.13s;
+}
+
+.btn-primary.btn-sm {
+    background: linear-gradient(90deg, #3498db 70%, #2980b9 100%);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+}
+.btn-primary.btn-sm:hover {
+    background: linear-gradient(90deg, #2086c4 80%, #14587b 100%);
+    box-shadow: 0 2px 10px rgba(52,152,219,0.10);
+}
+
+.btn-outline.btn-sm {
+    background: #fff;
+    border: 1.4px solid #3498db;
+    color: #3498db;
+    font-weight: 700;
+}
+.btn-outline.btn-sm:hover {
+    background: #3498db;
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(52,152,219,0.10);
+}
+
+/* --- MODAL --- */
+.mb-modal {
+    display: none;
+    position: fixed;
+    z-index: 5000;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    background: rgba(44,62,80,0.50);
+    align-items: center; justify-content: center;
+}
+.mb-modal-content {
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+    padding: 2.3rem 2rem 2rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 8% auto;
+    position: relative;
+    animation: modalIn 0.19s;
+}
+@keyframes modalIn {
+    from { transform: translateY(50px); opacity: 0;}
+    to { transform: translateY(0); opacity: 1;}
+}
+.mb-modal-close {
+    position: absolute;
+    right: 1rem; top: 1rem;
+    font-size: 1.6em;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.mb-modal-close:hover { color: #e74c3c; }
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .mybookings-header { padding: 1.6rem 0 1.2rem 0; }
+    .mybookings-header h2 { font-size: 1.3rem;}
+    .mb-modal-content { padding: 1.2rem 0.6rem; max-width: 97vw; }
+    .mb-table th, .mb-table td { padding: 0.7rem; font-size: 0.96em; }
+}
+
+/* Fix for mobile nav drawer */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; right: 0; left: 0; /* Full width */
+    background: #fff;
+    z-index: 2000;
+    transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 4px 32px rgba(44,62,80,0.10);
+    padding-top: 72px; /* Height of your header */
+}
+.mobile-nav.active {
+    display: block;
+}
+@media (min-width: 900px) {
+    .mobile-nav, .mobile-menu-toggle { display: none !important; }
+}
+/* --- Enhanced Booking Modal Details --- */
+#mb-modal-body {
+  padding: 1.2rem 0.3rem 0.5rem 0.3rem;
+  font-size: 1.13rem;
+  line-height: 1.75;
+  color: #34495e;
+  background: #f8fafc;
+  border-radius: 12px;
+  box-shadow: 0 2px 14px rgba(44,62,80,0.04);
+  margin-bottom: 1.2rem;
+}
+#mb-modal-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#mb-modal-body li {
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  font-size: 1.08em;
+}
+#mb-modal-body i {
+  color: #3498db;
+  margin-right: 0.3em;
+  min-width: 22px;
+  text-align: center;
+  font-size: 1.15em;
+}
+#mb-modal-body .badge {
+  padding: 0.4em 1.1em;
+  border-radius: 20px;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg,#24b47e 70%,#2ecc71 100%);
+  margin-left: 1em;
+}

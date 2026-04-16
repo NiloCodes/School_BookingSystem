@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Hall Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <header class="main-header">
+    <div class="container">
+        <div class="header-content">
+        <div class="logo-container">
+            <img src="/images/ucc.png" alt="University Logo" class="logo-image">
+            <a href="index.html" class="logo">
+            <div class="logo-text">
+                <span class="logo-title">University Hall Booking</span>
+                <span class="logo-subtitle">Smart Reservation System</span>
+            </div>
+            </a>
+        </div>
+        <nav class="main-nav">
+            <ul class="nav-list">
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+            <li class="nav-item"><a href="MyBookings.html" class="nav-link"><i class="fas fa-calendar-check"></i> My Bookings</a></li>
+            <li class="nav-item"><a href="coordinator.html" class="nav-link"><i class="fas fa-book-open"></i> Coordinator</a></li>
+            </ul>
+        </nav>
+        <!-- Mobile Hamburger Menu Button -->
+        <button class="mobile-menu-toggle" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        </div>
+    </div>
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav">
+        <div class="mobile-nav-content">
+        <div class="mobile-nav-list">
+            <a href="/index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="/MyBookings.html"><i class="fas fa-calendar-check"></i> My Bookings</a>
+            <a href="/coordinator.html"><i class="fas fa-book-open"></i> Coordinator</a>
+        </div>
+        </div>
+    </nav>
+    </header>
+
+    
+    <section class="search-section">
+        <div class="search-container">
+            <!-- Animated Background -->
+            <div class="search-background">
+                <div class="animated-wave"></div>
+                <div class="particle-container"></div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="search-content">
+                <h2 class="search-title">
+                    <span class="title-text">Find Your Perfect Space</span>
+                    <span class="title-icon">✨</span>
+            </h2>
+            <p class="search-subtitle">Discover and book university facilities in seconds</p>
+
+            <!-- Smart Search Form -->
+            <form class="search-form" id="smart-search-form">
+                <!-- Form Tabs -->
+                
+
+                <!-- Tab Contents -->
+                <div class="tab-content active" data-tab-content="quick-search">
+                    <div class="smart-form-grid">
+                        <!-- Date Picker with Visual Calendar -->
+                        <div class="form-group calendar-group">
+                            <label for="date">
+                                <i class="fas fa-calendar-alt"></i> When
+                            </label>
+                            <div class="date-input-container">
+                                <input type="date" id="startDate" class="date-input" required>
+                                <input type="date" id="endDate" class="date-input" required>
+                            </div>
+                        </div>
+
+                        <!-- Time Range Selector -->
+                        <div class="form-group time-group">
+                            <label for="time-range">
+                                <i class="fas fa-clock"></i> Time Range
+                            </label>
+                            <div class="time-range-slider">
+                                <div class="slider-track"></div>
+                                <input type="range" class="slider-thumb start-time" min="8" max="22" value="9">
+                                <input type="range" class="slider-thumb end-time" min="8" max="22" value="17">
+                                <div class="time-labels">
+                                    <span>8 AM</span>
+                                    <span>2 PM</span>
+                                    <span>10 PM</span>
+                                </div>
+                                <div class="time-display">9 AM - 5 PM</div>
+                            </div>
+                        </div>
+
+                        <!-- Capacity Selector with Visual Meter -->
+                        <div class="form-group capacity-group">
+                            <label for="capacity">
+                                <i class="fas fa-users"></i> Capacity
+                            </label>
+                            <div class="capacity-selector">
+                                <div class="capacity-meter">
+                                    <div class="meter-fill" style="width: 30%"></div>
+                                </div>
+                                <select id="capacity" class="styled-select">
+                                    <option value="10">10-30</option>
+                                    <option value="30">30-50</option>
+                                    <option value="50">50-100</option>
+                                    <option value="100">100+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Smart Suggestions -->
+                        
+                    </div>
+                </div>
+
+                <!-- Advanced Search Tab (hidden by default) -->
+                <div class="tab-content" data-tab-content="advanced-search">
+                    <!-- Advanced form content would go here -->
+                </div>
+
+                <!-- Recent Bookings Tab (hidden by default) -->
+                <div class="tab-content" data-tab-content="recent-bookings">
+                    <!-- Recent bookings content would go here -->
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="search-btn">
+                        <span class="btn-text">Find Spaces</span>
+                        <span class="btn-icon">
+                            <i class="fas fa-search"></i>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </button>
+                    
+                </div>
+            </form>
+
+            
+            
+        </div>
+    </div>
+    </section>
+
+    <section class="results-section">
+    <!-- Dynamic Results Header -->
+    <div class="results-header">
+        <div class="header-content">
+            <h2 class="dynamic-title">
+                <span class="title-text">Available Spaces</span>
+                </span>
+            </h2>
+        </div>
+
+    <div class="hall-grid" id="results-view">
+        <!-- Hall Card 1 with enhanced features -->
+        <div class="hall-card">
+            <div class="card-badge popular">Most Booked</div>
+            <div class="hall-image">
+                <img src="/images/lecture-hall.jpg" alt="Lecture Hall A" loading="lazy">
+                <div class="image-overlay">
+                    <button class="quick-view-btn" data-hall="lecture-a">
+                        <i class="fas fa-expand"></i> Quick View
+                    </button>
+                </div>
+            </div>
+            <div class="hall-info">
+                <div class="hall-header">
+                    <h3>Lecture Hall A</h3>
+                    <div class="rating" aria-label="Rating: 4.5 out of 5">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(42)</span>
+                    </div>
+                </div>
+                
+                <div class="hall-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>60 seats</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Science Block</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-wifi"></i>
+                        <span>High-speed WiFi</span>
+                    </div>
+                </div>
+                
+                <div class="availability">
+                    <div class="time-slots">
+                        <span class="slot available">9:00 AM</span>
+                        <span class="slot available">11:00 AM</span>
+                        <span class="slot booked">1:00 PM</span>
+                        <span class="slot available">3:00 PM</span>
+                    </div>
+                    <div class="more-slots">+2 more time slots</div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="book-btn" data-hall="lecture-a">
+                        <i class="far fa-calendar-plus"></i> Book Now
+                    </button>
+                    <button class="fav-btn" aria-label="Add to favorites">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hall Card 2 with different features -->
+        <div class="hall-card">
+            <div class="card-badge new">Newly Renovated</div>
+            <div class="hall-image">
+                <img src="/images/seminar-room.jpg" alt="Seminar Room 2" loading="lazy">
+                <div class="image-overlay">
+                    <button class="quick-view-btn" data-hall="seminar-2">
+                        <i class="fas fa-expand"></i> Quick View
+                    </button>
+                </div>
+            </div>
+            <div class="hall-info">
+                <div class="hall-header">
+                    <h3>Seminar Room 2</h3>
+                    <div class="rating" aria-label="Rating: 4.8 out of 5">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(28)</span>
+                    </div>
+                </div>
+                
+                <div class="hall-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>25 seats</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Arts Building</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-video"></i>
+                        <span>Video Conferencing</span>
+                    </div>
+                </div>
+                
+                <div class="availability">
+                    <div class="time-slots">
+                        <span class="slot available">11:00 AM</span>
+                        <span class="slot available">2:00 PM</span>
+                        <span class="slot available">4:00 PM</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="book-btn" data-hall="seminar-2">
+                        <i class="far fa-calendar-plus"></i> Book Now
+                    </button>
+                    <button class="fav-btn" aria-label="Add to favorites">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hall-card">
+            <div class="card-badge new">Newly Built</div>
+            <div class="hall-image">
+                <img src="/images/cs.jpg" alt="Computer Room" loading="lazy">
+                <div class="image-overlay">
+                    <button class="quick-view-btn" data-hall="seminar-2">
+                        <i class="fas fa-expand"></i> Quick View
+                    </button>
+                </div>
+            </div>
+            <div class="hall-info">
+                <div class="hall-header">
+                    <h3>Computer Room 2</h3>
+                    <div class="rating" aria-label="Rating: 4.9 out of 5">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(100K+)</span>
+                    </div>
+                </div>
+                
+                <div class="hall-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-users"></i>
+                        <span>300 seats</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-building"></i>
+                        <span>Computer Laboratory</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-video"></i>
+                        <span>Programing Session</span>
+                    </div>
+                </div>
+                
+                <div class="availability">
+                    <div class="time-slots">
+                        <span class="slot available">09:00 AM</span>
+                        <span class="slot available">4:00 PM</span>
+                        <span class="slot available">6:00 PM</span>
+                    </div>
+                </div>
+                
+                <div class="card-footer">
+                    <button class="book-btn" data-hall="seminar-3">
+                        <i class="far fa-calendar-plus"></i> Book Now
+                    </button>
+                    <button class="fav-btn" aria-label="Add to favorites">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="results-footer">
+        <div class="pagination">
+            <button class="page-btn disabled">
+                <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <span class="page-numbers">
+                <button class="page-num active">1</button>
+                <button class="page-num">2</button>
+                <button class="page-num">3</button>
+                <span>...</span>
+                <button class="page-num">8</button>
+            </span>
+            <button class="page-btn">
+                Next <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="results-count">Showing 1-6 of 23 available halls</div>
+    </div>
+    </section>
+
+<footer>
+    <p>© 2023 UCC. All rights reserved.</p>
+</footer>
+
+
+<!-- Booking Request Modal -->
+<div id="bookingModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="bookingModalTitle">
+  <div class="modal-content">
+    <h3 id="bookingModalTitle">Request Booking</h3>
+    <form id="bookingForm">
+      <input type="hidden" id="modalHallId">
+      <div class="form-group">
+        <label for="modalName">Name:</label>
+        <input type="text" id="modalName" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="modalEmail">Email:</label>
+        <input type="email" id="modalEmail" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="modalDate">Date:</label>
+        <input type="date" id="modalDate" name="date" required>
+      </div>
+      <div class="form-group">
+        <label for="modalTime">Time:</label>
+        <select id="modalTime" name="time" required>
+          <option value="">Select a time</option>
+          <option value="08:00">08:00</option>
+          <option value="10:00">10:00</option>
+          <option value="12:00">12:00</option>
+          <option value="14:00">14:00</option>
+          <option value="16:00">16:00</option>
+          <option value="18:00">18:00</option>
+        </select>
+      </div>
+      <div class="modal-actions flex-between">
+        <button type="button" class="btn btn-secondary" id="modalCloseBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirmBookingModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="confirmBookingTitle">
+  <div class="modal-content">
+    <h3 id="confirmBookingTitle">Confirm Your Booking</h3>
+    <div id="confirmBookingBody"></div>
+    <div class="modal-actions flex-between">
+      <button type="button" class="btn btn-secondary" id="confirmCancelBtn">Cancel</button>
+      <button type="button" class="btn btn-primary" id="confirmSubmitBtn">Confirm Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- Coordinator Login Modal -->
+<div id="loginModal" class="modal" aria-hidden="true" aria-labelledby="loginTitle">
+  <div class="modal-content">
+    <h3 id="loginTitle">Coordinator Login</h3>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginUser">Username:</label>
+        <input type="text" id="loginUser" name="username"  required>
+      </div>
+      <div class="form-group">
+        <label for="loginPass">Password:</label>
+        <input type="password" id="loginPass" name="password" a required>
+      </div>
+      <div id="loginError" style="color:#e74c3c; min-height:22px; font-size:0.98em; margin-bottom:7px; text-align:center;"></div>
+      <div class="modal-actions flex-between">
+        <button type="button" class="btn btn-secondary" id="loginCancelBtn">Cancel</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script src="/js/search.js">
+    
+</script>
+
+
+</body>
+</html>
